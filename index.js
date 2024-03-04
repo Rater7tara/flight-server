@@ -33,11 +33,15 @@ app.get('/flights/:flights', (req, res) => {
 });
 
 
-app.get('/hotels', (req, res) => {
+app.get('/hotels/:hotels', (req, res) => {
+    const checkIn = req.params.hotels.slice(0, 10);
+    const checkOut = req.params.hotels.slice(10, 20);
+    const city = req.params.hotels.slice(20);
+    console.log(checkIn, checkOut, city);
     getJson({
         api_key: "5ef558635e604638687cf7626054f73f4b7b5639cddb37b45f2984e8c79b1ecb",
         engine: "google_hotels",
-        q: "Bali",
+        q: city,
         check_in_date: "2024-03-05",
         check_out_date: "2024-03-06",
         adults: "2",
@@ -48,6 +52,7 @@ app.get('/hotels', (req, res) => {
         //console.log(util.inspect(results, { depth: null, colors: true }));
         res.json(results);
     });
+
 });
 
 
